@@ -1,11 +1,13 @@
 import os
 from flask import Flask
+from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
 
-@app.get('/')
+@app.route('/')
 def index():
-    return "<h1>Сторінка Julia на Railway працює!</h1>"
+    return "<h1>Сторінка Julia з метриками працює</h1>"
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
